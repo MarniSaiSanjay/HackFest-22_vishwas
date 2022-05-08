@@ -168,12 +168,11 @@ app.post('/addReview/:id',  isLoggedIn, catchAsyncError(reviewController.addRevi
 // DELETE REVIEW
 app.delete('/review/:place_id/delete/:re_id', isLoggedIn, isReviewOwner, catchAsyncError(reviewController.deleteReview));
 
+app.use('/auth', require('./routes/auth'));
+
 app.all('*', (req, res, next) => {
     res.render('pagenotfound');
 })
-
-app.use('/auth', require('./routes/auth'));
-
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
